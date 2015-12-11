@@ -41,8 +41,36 @@ floors = [
 
 floor = 4
 action = "none"
-z = 0
+keypress = "none"
 gamerun = "y"
+
+#main menu
+print("++++++++++++++++++++++++++++++++")
+for x in range(2):
+    print("+                              +")
+print("+   WELCOME TO TOWER ESCAPE    +")
+print("+                              +")
+print("+      |\             /|       +")
+print("+      ||             ||       +")
+print("+      | \           / |       +")
+print("+      |  |  +_o_,  |  |       +")
+print("+       | |__|_|____| |        +")
+print("+       |  \ |/`\   / |        +")
+print("+        |  -------- |         +")
+print("+        |           |         +")
+print("+         |         |          +")
+print("++++++++++++++++++++++++++++++++")
+print("+++ NEW +++++++++++++++ QUIT +++")
+
+while keypress == "none":
+    keypress = input("?")
+    if keypress == "new":
+        gamerun = "y"
+    elif keypress == "quit":
+        gamerun = "n"
+    else:
+        "I don't recognize that command."
+        keypress = "none"
 
 
 #main game loop
@@ -52,9 +80,7 @@ while gamerun == "y":
         player.stats['Experience'] -= (100 + ((player.stats['Level'] - 1) * 10 ) * ((player.stats['Level'] - 1) * 10))
         player.stats['Level'] += 1
         print("You leveled up to level: " + str(player.stats['Level']) + "!")
-    print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
-    print(" -----------------------------------------")
-    input("")
+
     for x in range(4000):
         print("   +--------------+")
     for x in range(4000):
@@ -64,7 +90,9 @@ while gamerun == "y":
     for x in range(1000):
         print("+--------------------+")
     print("+--------[ ]---------+")
-
+    utilities.turnbump(2)
+    print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
+    print(" -----------------------------------------")
     while action != "escape" or player.stats["health"] >= 1:
         utilities.turnbump(3)
         print("You're on the " + floors[floor].name)
