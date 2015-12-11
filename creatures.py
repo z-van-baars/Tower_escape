@@ -15,3 +15,12 @@ def build_rat():
 	return Mob("Rat", 2, 25, 0.2, 60, 1)
 def build_troll():
 	return Mob("Troll", 1, 250, 3, 40, 2)
+
+hostile_npcs = [
+  build_skele,
+  build_rat,
+  build_troll,
+  ]
+  
+def pick_enemy():
+	return random.choice(hostile_npcs)()

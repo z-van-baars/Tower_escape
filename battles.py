@@ -29,7 +29,7 @@ def move_eval():
     return hit
 
 def battle():
-    enemy = creatures.build_rat()
+    enemy = creatures.pick_enemy()
     print(enemy.name)
     while enemy.health > 0:
         utilities.turnbump(3)
