@@ -48,8 +48,23 @@ gamerun = "y"
 #main game loop
 while gamerun == "y":
     utilities.turnbump(21)
+    if player.stats['Experience'] > (100 + ((player.stats['Level'] - 1) * 10 ) * ((player.stats['Level'] - 1) * 10 )):
+        player.stats['Experience'] -= (100 + ((player.stats['Level'] - 1) * 10 ) * ((player.stats['Level'] - 1) * 10))
+        player.stats['Level'] += 1
+        print("You leveled up to level: " + str(player.stats['Level']) + "!")
     print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
     print(" -----------------------------------------")
+    input("")
+    for x in range(4000):
+        print("   +--------------+")
+    for x in range(4000):
+        print("  +----------------+")
+    for x in range(2000):
+        print(" +------------------+")
+    for x in range(1000):
+        print("+--------------------+")
+    print("+--------[ ]---------+")
+
     while action != "escape" or player.stats["health"] >= 1:
         utilities.turnbump(3)
         print("You're on the " + floors[floor].name)
@@ -64,7 +79,7 @@ while gamerun == "y":
 
         elif action == "stats":
             for key in player.stats:
-                print("{0}:{1}".format(key, player.stats[key]))
+                print("{0} : {1}".format(key, player.stats[key]))
             input("hit enter when ready --->")
             utilities.turnbump(21)
 

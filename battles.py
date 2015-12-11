@@ -11,21 +11,22 @@ def move_eval():
         print("What kind of attack (Reckless // Normal // Cautious)")
         move = input("?")
         if move == "reckless":
-            if (player.stats['Accuracy'] - random.randint(0, 100)) > 30:
-                hit = (random.randint(1, 80) * player.stats['Attack'])
+            if (random.randint(0, 100) * player.stats['Accuracy']) > 50:
+                hit = round(random.randint(40, 80) * player.stats['Attack'])
             else:
                 hit = 0
 
         elif move == "normal":
-            if (player.stats['Accuracy'] - random.randint(0, 100)) > 10:
-                hit = (random.randint(15, 40) * player.stats['Attack'])
+            if (random.randint(0, 100) * player.stats['Accuracy']) > 15:
+                hit = round(random.randint(15, 40) * player.stats['Attack'])
             else:
                 hit = 0
 
         elif move == "cautious":
-            if (player.stats['Accuracy'] - random.randint(0, 100)) > 0:
-                hit = (random.randint(1, 15) * player.stats['Attack'])
+            if (random.randint(0, 100) * player.stats['Accuracy']) > 5:
+                hit = round(random.randint(2, 15) * player.stats['Attack'])
             else:
+                hit = 0
 
         else:
             print("I don't recognize that command.")
@@ -37,10 +38,11 @@ def battle():
     enemy = creatures.pick_enemy()
     utilities.turnbump(3)
     print("A wild " + enemy.name + " attacks!")
+    input("")
     while enemy.health > 0 and player.stats['Health'] > 0:
         utilities.turnbump(3)
         print("-------------------------------")
-        print("Health : " + str(player.stats['Health']) + "               " + enemy.name +" Health : " + str(enemy.health))
+        print("Health : " + str(player.stats['Health']) + " - - - - - - - - - - " + enemy.name +" Health : " + str(enemy.health))
         hit = move_eval()
         if hit > 0:
             print("Hit for: " + str(hit) + " damage!")
@@ -51,18 +53,27 @@ def battle():
         input("Press Enter when ready --->")
         utilities.turnbump(1)
         if enemy.health > 0:
-            if (enemy.accuracy - random.randint(0, 100)) > 0:
+            if (random.randint(0, 100) * enemy.accuracy) > 25:
                 enemy_hit = enemy.attack
-                enemy_hit += random.randint(1, 10)
+                enemy_hit *= random.randint(1, 10)
+                enemy_hit = round(enemy_hit)
                 player.stats['Health'] -= enemy_hit
                 print("The enemy hit for: " + str(enemy_hit) + " damage!")
 
             else:
                 print("The enemy's attack missed!")
+            
             input("Press Enter when ready --->")
-        elif player.stats['Health'] > 0:
-
-
+        else:
             print("You defeated your foe!")
-    input("Press enter when ready --->")
-
+            input("")
+            xp_range = round(enemy.xp * 1.1)
+            exp = enemy.xp + random.randint(0, xp_range)
+            gold_drop = round(enemy.loot * random.randint(0, 100))
+            print(enemy.name + " dropped " + str(gold_drop) + " gold coin(s)!")
+            player.stats['Gold'] += gold_drop
+            player.stats['Experience'] += exp
+            input(" ")
+            print("Gained " + str(exp) + " XP!")
+            input("")
+    input("Press Enter when ready --->")
