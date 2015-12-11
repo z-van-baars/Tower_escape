@@ -19,10 +19,10 @@ class Floor(object):
 def explore():
     if floors[floor].searched == 0:
         if random.randint(1, 100) < floors[floor].danger:
-                    print("A WILD SKELETON APPEARED!!!")
-                    input("hit enter when ready --->")
-                    utilities.turnbump(3)
-                    battles.battle()
+            print("An enemy rushes from the darkness!")
+            input("hit enter when ready --->")
+            utilities.turnbump(3)
+            battles.battle()
                     
     else:
         print("You've already searched this floor!")
@@ -128,7 +128,7 @@ while gamerun == "y":
 
 
     gamerun = input("play again(y/n?")
-    y = 0
+
 
 
 

@@ -18,6 +18,11 @@ def build_troll():
 
 hostile_npcs = [
   build_skele,
+  build_skele,
+  build_skele,
+  build_skele,
+  build_rat,
+  build_rat,
   build_rat,
   build_troll,
   ]

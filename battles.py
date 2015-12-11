@@ -11,16 +11,21 @@ def move_eval():
         print("What kind of attack (Reckless // Normal // Cautious)")
         move = input("?")
         if move == "reckless":
-            hit = (random.randint(1, 80) * player.stats['Attack'])
-            if hit < 30:
+            if (player.stats['Accuracy'] - random.randint(0, 100)) > 30:
+                hit = (random.randint(1, 80) * player.stats['Attack'])
+            else:
                 hit = 0
 
         elif move == "normal":
-            hit = (random.randint(15, 40) * player.stats['Attack'])
-        
+            if (player.stats['Accuracy'] - random.randint(0, 100)) > 10:
+                hit = (random.randint(15, 40) * player.stats['Attack'])
+            else:
+                hit = 0
 
         elif move == "cautious":
-            hit = (random.randint(1, 15) * player.stats['Attack'])
+            if (player.stats['Accuracy'] - random.randint(0, 100)) > 0:
+                hit = (random.randint(1, 15) * player.stats['Attack'])
+            else:
 
         else:
             print("I don't recognize that command.")
@@ -30,11 +35,12 @@ def move_eval():
 
 def battle():
     enemy = creatures.pick_enemy()
-    print(enemy.name)
-    while enemy.health > 0:
+    utilities.turnbump(3)
+    print("A wild " + enemy.name + " attacks!")
+    while enemy.health > 0 and player.stats['Health'] > 0:
         utilities.turnbump(3)
         print("-------------------------------")
-        print("Health : " + str(player.stats['Health']) + "/ Enemy Health : " + str(enemy.health))
+        print("Health : " + str(player.stats['Health']) + "               " + enemy.name +" Health : " + str(enemy.health))
         hit = move_eval()
         if hit > 0:
             print("Hit for: " + str(hit) + " damage!")
@@ -54,8 +60,9 @@ def battle():
             else:
                 print("The enemy's attack missed!")
             input("Press Enter when ready --->")
-        
+        elif player.stats['Health'] > 0:
 
-    print("You defeated your foe!")
+
+            print("You defeated your foe!")
     input("Press enter when ready --->")
 

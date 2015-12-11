@@ -8,7 +8,7 @@ stats = {
     'Defense': 1.0,
     'Attack': 1.0,
     'R. Attack': 1.0,
-    'Accuracy': 1.0,
+    'Accuracy': 10,
     'Level': 1,
     'Experience': 0
 }
