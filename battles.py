@@ -29,9 +29,8 @@ def move_eval():
     return hit
 
 def battle():
-    enemy = creatures.Mob(creatures.skeleton.name, creatures.skeleton.hostile, creatures.skeleton.health, creatures.skeleton.attack, creatures.skeleton.accuracy, creatures.skeleton.loot)
-    print(enemy.health)
-    print(creatures.skeleton.health)
+    enemy = creatures.build_rat()
+    print(enemy.name)
     while enemy.health > 0:
         utilities.turnbump(3)
         print("-------------------------------")
