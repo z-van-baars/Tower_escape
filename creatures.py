@@ -10,8 +10,8 @@ class Mob(object):
         self.loot = loot
 
 def build_skele():
-	return Mob("Skeleton", 1, 100, 1, 40, 1),
+	return Mob("Skeleton", 1, 100, 1, 40, 1)
 def build_rat():
-	return Mob("Rat", 2, 25, 0.2, 60, 1),
+	return Mob("Rat", 2, 25, 0.2, 60, 1)
 def build_troll():
-	return Mob("Troll", 1, 250, 3, 40, 2),
+	return Mob("Troll", 1, 250, 3, 40, 2)
