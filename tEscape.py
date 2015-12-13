@@ -1,13 +1,14 @@
 
 
-
 import random
 import battles
 import player
 import creatures
 import utilities
 
+
 class Floor(object):
+
     def __init__(self, name, size, danger, cleared, searched):
         self.name = name
         self.size = size
@@ -16,20 +17,26 @@ class Floor(object):
         self.searched = searched
 
 
+def levelup():
+
+    player.stats['Level'] += 1
+    print("You leveled up to level: " + str(player.stats['Level']) + "!")
+
+
 def explore():
+
     if floors[floor].searched == 0:
         if random.randint(1, 100) < floors[floor].danger:
             print("An enemy rushes from the darkness!")
             input("hit enter when ready --->")
             utilities.turnbump(3)
             battles.battle()
-                    
     else:
         print("You've already searched this floor!")
         input("")
         input("hit enter when ready")
 
-#creating initial condition variables
+# creating initial condition variables
 
 floors = [
     Floor("1st Floor", 1, 100, 0, 0),
@@ -44,10 +51,9 @@ action = "none"
 keypress = "none"
 gamerun = "y"
 
-#main menu
+"""main menu"""
 print("++++++++++++++++++++++++++++++++")
-for x in range(2):
-    print("+                              +")
+print("+                              +")
 print("+   WELCOME TO TOWER ESCAPE    +")
 print("+                              +")
 print("+      |\             /|       +")
@@ -73,13 +79,11 @@ while keypress == "none":
         keypress = "none"
 
 
-#main game loop
+"""main game loop"""
 while gamerun == "y":
     utilities.turnbump(21)
-    if player.stats['Experience'] > (100 + ((player.stats['Level'] - 1) * 10 ) * ((player.stats['Level'] - 1) * 10 )):
-        player.stats['Experience'] -= (100 + ((player.stats['Level'] - 1) * 10 ) * ((player.stats['Level'] - 1) * 10))
-        player.stats['Level'] += 1
-        print("You leveled up to level: " + str(player.stats['Level']) + "!")
+    if player.stats['Experience'] > (100 + ((player.stats['Level'] - 1) * 10) * ((player.stats['Level'] - 1) * 10)):
+        player.stats['Experience'] -= (100 + ((player.stats['Level'] - 1) * 10) * ((player.stats['Level'] - 1) * 10))
 
     for x in range(4000):
         print("   +--------------+")
@@ -92,18 +96,17 @@ while gamerun == "y":
     print("+--------[ ]---------+")
     utilities.turnbump(2)
     print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
-    print(" -----------------------------------------")
+    print(" _________________________________________")
     while action != "escape" or player.stats["health"] >= 1:
         utilities.turnbump(3)
         print("You're on the " + floors[floor].name)
-        print("------------------------------------")
+        print("_________________________________________")
         print("WHATDO?")
         action = input("?")
 
-        ## Battle function tester
+        # Battle function tester
         if action == "battle":
             battles.battle()
-
 
         elif action == "stats":
             for key in player.stats:
@@ -115,12 +118,13 @@ while gamerun == "y":
             print(str(floors[floor].name))
 
         elif action == "attack":
-            print(stats['Attack'])
+            print(player.stats['Attack'])
 
         elif action == "explore":
             explore()
 
-        #can't go below floor 1
+        # can't go below floor 1
+
         elif action == "down" and floor > 0:
             if floor > 0:
                 if floors[floor].cleared == 0:
@@ -140,7 +144,7 @@ while gamerun == "y":
                 input("")
             utilities.turnbump(3)
 
-        #can't go above floor 5
+        # can't go above floor 5
         elif action == "up":
             if floor != 4:
                 floor += 1
@@ -154,24 +158,16 @@ while gamerun == "y":
             input("")
             utilities.turnbump(3)
 
-
-
-
     utilities.turnbump(1)
 
-    if stats["health"] < 1:
+    if player.stats["health"] < 1:
         print("You succumb to your wounds")
 
     else:
-        #win conditions
+        # win conditions
         print("++++++++++++++++++++++++++++")
         print("+                          +")
         print("+++You Saved the Kingdom!+++")
         print("++++++++++++++++++++++++++++")
 
-
     gamerun = input("play again(y/n?")
-
-
-
-

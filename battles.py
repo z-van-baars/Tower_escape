@@ -1,28 +1,30 @@
-##battles.py
+
+
 import random
 import player
 import creatures
 import utilities
 
+
 def move_eval():
     hit = "none"
     while hit == "none":
         move = "none"
-        print("What kind of attack (Reckless // Normal // Cautious)")
+        print("What kind of attack ([R]eckless // [N]ormal // [C]autious)")
         move = input("?")
-        if move == "reckless":
+        if move == "r" or move == "R":
             if (random.randint(0, 100) * player.stats['Accuracy']) > 50:
                 hit = round(random.randint(40, 80) * player.stats['Attack'])
             else:
                 hit = 0
 
-        elif move == "normal":
+        elif move == "n" or move == "N":
             if (random.randint(0, 100) * player.stats['Accuracy']) > 15:
                 hit = round(random.randint(15, 40) * player.stats['Attack'])
             else:
                 hit = 0
 
-        elif move == "cautious":
+        elif move == "c" or move == "C":
             if (random.randint(0, 100) * player.stats['Accuracy']) > 5:
                 hit = round(random.randint(2, 15) * player.stats['Attack'])
             else:
@@ -34,6 +36,7 @@ def move_eval():
         utilities.turnbump(1)
     return hit
 
+
 def battle():
     enemy = creatures.pick_enemy()
     utilities.turnbump(3)
@@ -41,8 +44,8 @@ def battle():
     input("")
     while enemy.health > 0 and player.stats['Health'] > 0:
         utilities.turnbump(3)
-        print("-------------------------------")
-        print("Health : " + str(player.stats['Health']) + " - - - - - - - - - - " + enemy.name +" Health : " + str(enemy.health))
+        print("Health : " + str(player.stats['Health']) + " - - - - - - - - - - - - " + enemy.name +" Health : " + str(enemy.health))
+        print("__________________________________________________________")
         hit = move_eval()
         if hit > 0:
             print("Hit for: " + str(hit) + " damage!")
@@ -62,7 +65,6 @@ def battle():
 
             else:
                 print("The enemy's attack missed!")
-            
             input("Press Enter when ready --->")
         else:
             print("You defeated your foe!")
