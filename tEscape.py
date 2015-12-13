@@ -45,7 +45,7 @@ action = "none"
 keypress = "none"
 gamerun = "y"
 
-"""main menu"""
+# main menu
 print("++++++++++++++++++++++++++++++++")
 print("+                              +")
 print("+   WELCOME TO TOWER ESCAPE    +")
@@ -55,8 +55,8 @@ print("+      ||             ||       +")
 print("+      | \           / |       +")
 print("+      |  |  +_o_,  |  |       +")
 print("+       | |__|_|____| |        +")
-print("+       |  \ |/`\   / |        +")
-print("+        |  -------- |         +")
+print("+       |  \ |/`\  /  |        +")
+print("+        |  -------  |         +")
 print("+        |           |         +")
 print("+         |         |          +")
 print("++++++++++++++++++++++++++++++++")
@@ -73,19 +73,8 @@ while keypress == "none":
         keypress = "none"
 
 
-"""main game loop"""
+# main game loop
 while gamerun == "y":
-    utilities.turnbump(21)
-    for x in range(4000):
-        print("   +--------------+")
-    for x in range(4000):
-        print("  +----------------+")
-    for x in range(2000):
-        print(" +------------------+")
-    for x in range(1000):
-        print("+--------------------+")
-    print("+--------[ ]---------+")
-
     utilities.turnbump(2)
     print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
     print(" _________________________________________")
@@ -124,9 +113,8 @@ while gamerun == "y":
                 if floors[floor].cleared == 0:
 
                     if random.randint(1, 100) < floors[floor].danger:
-                        print("A WILD SKELETON APPEARED!!!")
-                        input("hit enter when ready --->")
                         battles.battle()
+                        input("hit enter when ready --->")
 
                     else:
                         print("you may pass")
