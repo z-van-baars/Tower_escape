@@ -17,12 +17,6 @@ class Floor(object):
         self.searched = searched
 
 
-def levelup():
-
-    player.stats['Level'] += 1
-    print("You leveled up to level: " + str(player.stats['Level']) + "!")
-
-
 def explore():
 
     if floors[floor].searched == 0:
@@ -82,9 +76,6 @@ while keypress == "none":
 """main game loop"""
 while gamerun == "y":
     utilities.turnbump(21)
-    if player.stats['Experience'] > (100 + ((player.stats['Level'] - 1) * 10) * ((player.stats['Level'] - 1) * 10)):
-        player.stats['Experience'] -= (100 + ((player.stats['Level'] - 1) * 10) * ((player.stats['Level'] - 1) * 10))
-
     for x in range(4000):
         print("   +--------------+")
     for x in range(4000):
@@ -94,10 +85,12 @@ while gamerun == "y":
     for x in range(1000):
         print("+--------------------+")
     print("+--------[ ]---------+")
+
     utilities.turnbump(2)
     print(" +++ ESCAPE THE EVIL WIZARD'S TOWER!!! +++ ")
     print(" _________________________________________")
     while action != "escape" or player.stats["health"] >= 1:
+        player.xp_check(player.stats['Experience'], player.stats['Level'])
         utilities.turnbump(3)
         print("You're on the " + floors[floor].name)
         print("_________________________________________")
@@ -107,7 +100,8 @@ while gamerun == "y":
         # Battle function tester
         if action == "battle":
             battles.battle()
-
+        elif action == "e":
+            player.stats['Experience'] += 150
         elif action == "stats":
             for key in player.stats:
                 print("{0} : {1}".format(key, player.stats[key]))
